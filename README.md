@@ -30,6 +30,4 @@ I am not a c# dev or have used unity before etc (PHP only), so this was really o
 * Player counts (hardcoded to 0)
 * server game version display in list (shows x.yy or something)
 
-hope someone else finds it useful maybe! The source code for the patches can be found here too:
-
-https://pastebin.com/ED1TXy6t
+hope someone else finds it useful maybe!
