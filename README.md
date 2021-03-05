@@ -1,33 +1,56 @@
-All this mod does it let you specify servers to show up at the top of the server browser.
+This mod makes getting to your friends servers faster. It lets you specify custom servers to show up at the top of the server browser, and optionally can prefill passwords too.
 
-This mod requires Bepinex installed in your copy of Valheim for it to work. See instructions here https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/
+This mod requires Bepinex installed in your copy of Valheim for it to work. See instructions here: https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/
 
 In the instructions below, {valheim install} refers to a location on your hard drive, likely "C:\Program Files (x86)\Steam\steamapps\common\Valheim" if you are on windows and installed to default location.
 
 # INSTALL
+
 ValheimFaveServers is just a .dll file that you drop into your {valheim install}/Bepinex/plugins directory (like other bepinex mods).
 
-# CONFIGURATION:
+# CONFIGURATION
+
 Launch Valheim and exit. You will get a new config file at:
 
 {valheim install}/Bepinex/config
 
-Called "net.l41rx.valheimfaveservers.cfg"
+Called "net.l41rx.valheimfaveservers.cfg".
 
-Edit this file to include the IP addresses or hostnames of your favourite servers. E.g.
+It will contain a couple general options and then server info.
 
-Server IP Addresses = 195.162.137.30,173.162.137.28
-Then, relaunch the game and go to the server browser. You will see the IP Addresses or hostnames you added at the (assuming) top of the list, prefixed with "!!!VFS:" (so it sorts to the top, for easier access)
+It comes with an example configuration for a fake server "Comradely Conquest". 
 
-Thats all it does! Takes the hosts/IPs in the config file and puts them at the top of the server browser.
+## You can add more servers by:
 
+1. Appending a new server key (lowercase, no spaces) to the config entry "`[General.ServerKeys]`"
+
+2. Copying the Comradely Conquest example config blocks (host, name, password, port) *(or relaunching/quitting, see notes)* and filling in the appropriate information
+
+## You can remove a server by:
+
+1. Removing its key
+
+2. Removing its server blocks
+
+## Note
+
+If you launch the game with a new server key, but haven't created the blocks for the server properties, the new server property blocks will be automatically generated for you with the correct key, and default values. This can be faster/safer than copying the example.
 
 # LIMITATIONS
-I am not a c# dev or have used unity before etc (PHP only), so this was really only for me to get to a friends server without having to go back to our messages to get the IP. Because of this, the mod does not support:
 
-* Ports other than 2456
-* Actual server names (just shows host/ip)
-* Player counts (hardcoded to 0)
-* server game version display in list (shows x.yy or something)
+I'm not sure how to query Valheim servers for their version or player counts, so:
 
-hope someone else finds it useful maybe!
+* Player counts are hardcoded to 0
+* Server version shows as '?'
+
+I find the configuration is a bit clunky using the default bepinex config classes. Thats why:
+
+* it takes a couple restarts to get a complete config.
+
+Also, **if you specify the wrong prefill password**, you cant change it in game, you have to quit and change the config. I could fix this so you can backspace and put the right one it, but it would take me time and I dont think thats very useful anyway.
+
+# SUPPORT
+
+If the mod isnt working like you think it should or theres something I can add you can message me on Twitter: [L41rx](https://twitter.com/L41rx)
+
+I hope someone else finds it useful! The source can be found at Github: [L41rx/ValheimFaveServers](https://github.com/L41rx/ValheimFaveServers)
