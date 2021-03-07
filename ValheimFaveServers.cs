@@ -9,6 +9,7 @@ using System.Linq;
 using System.ComponentModel;
 using Steamworks;
 using BepInEx.Logging;
+using System.Globalization;
 
 namespace ValheimFaveServers
 {
@@ -19,7 +20,7 @@ namespace ValheimFaveServers
         // plugin info
         public const string pluginGuid = "net.l41rx.valheimfaveservers";
         public const string pluginName = "ValheimFaveServers";
-        public const string pluginVersion = "1.0.0";
+        public const string pluginVersion = "1.0.1";
         // config entries
         public string configVersion;
         public string configPrefix;
@@ -36,7 +37,7 @@ namespace ValheimFaveServers
         {
             // Config
             ValheimFaveServers.instance = this; // used to refer to the plugins settings in the patches
-            this._Logger = this.Logger;
+            this._Logger = this.Logger; // what is protected becomes public
             this.updateConfig();
 
             // Patching
@@ -46,9 +47,9 @@ namespace ValheimFaveServers
 
         private void updateConfig()
         {
-            this.Config.Reload();
+            // this.Config.Reload(); // I do this because I saw CameraMod do it or something idk
             this.configVersion = this.Config.Bind("General.ConfigVersion", "Version", ValheimFaveServers.pluginVersion, "Compatibility for older versions of the mod. Defaults to current mod version (" + ValheimFaveServers.pluginVersion + ") on new install. Update this if you notice new settings don't take effect.").Value;
-            this.configPrefix = this.Config.Bind("General.Prefix", "Server name prefix", "!!VFS: ", "Text to show before server name in browser. Defaults to !!VFS to exploit sort order").Value;
+            this.configPrefix = this.Config.Bind("General.Prefix", "Server name prefix", "! ", "Text to show before server name in browser. Defaults to ! to exploit sort order").Value;
             ConfigEntry<string> skeys = this.Config.Bind("General.ServerKeys", "Keys of enabled servers (comma separated, no spaces)", "cc", "How many servers do you want to favourite? Enter a 'key' for each. Save and launch+close Valheim to automatically generate the configuration for each, then fill them in.");
             if (skeys.Value.Trim() != "")
                 this.configServerKeys = skeys.Value.Split(',');
